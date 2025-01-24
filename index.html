@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Explosive Star Run</title>
+    <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0;
+            background: #000;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+
+        #startScreen {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        #endScreen {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 10px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="startScreen">
+        <h1>Welcome to Explosive Star Run</h1>
+        <p>Collect stars and avoid the bombs!</p>
+        <p id="highscoreStart">Highscore: 0</p>
+        <button onclick="startGame()">Start Game</button>
+    </div>
+
+    <div id="endScreen">
+        <h1>Game Over</h1>
+        <p id="finalScore">Your Score: 0</p>
+        <p id="highscore">Highscore: 0</p>
+        <button onclick="restartGame()">Restart</button>
+    </div>
+
+    <script type="text/javascript">
+        // Declare game variables
+        var config = {
+            type: Phaser.AUTO,
+            width: window.innerWidth,
+            height: window.innerHeight,
+            physics: {
+                default: 'arcade',
+                arcade: {
+                    gravity: { y: 300 },
+                    debug: false
+                }
+            },
+            scene: {
+                preload: preload,
+                create: create,
+                update: update
+            }
+        };
+
+        var player;
+        var stars;
+        var bombs;
+        var platforms;
+        var cursors;
+        var score = 0;
+        var gameOver = false;
+        var scoreText;
+
+        // Highscore setup using localStorage
+        var highscore = localStorage.getItem('highscore') ? parseInt(localStorage.getItem('highscore')) : 0;
+
+        // Display highscore on the start screen
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('highscoreStart').innerText = 'Highscore: ' + highscore;
+        });
+
+        var game = new Phaser.Game(config);
+
+        function preload() {
+            this.load.image('sky', 'assets/sky.png');
+            this.load.image('ground', 'assets/platform.png');
+            this.load.image('star', 'assets/star.png');
+            this.load.image('bomb', 'assets/bomb.png');
+            this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
+        }
+
+        function create() {
+            this.add.image(window.innerWidth / 2, window.innerHeight / 2, 'sky').setDisplaySize(window.innerWidth, window.innerHeight);
+
+            platforms = this.physics.add.staticGroup();
+            platforms.create(window.innerWidth / 2, window.innerHeight - 32, 'ground').setScale(window.innerWidth / 400, 2).refreshBody();
+            platforms.create(window.innerWidth * 0.75, window.innerHeight * 0.80, 'ground').setScale(1).refreshBody();
+            platforms.create(window.innerWidth * 0.1, window.innerHeight * 0.72, 'ground').setScale(1).refreshBody();
+            platforms.create(window.innerWidth * 0.93, window.innerHeight * 0.65, 'ground').setScale(1).refreshBody();
+            platforms.create(window.innerWidth * 0.70, window.innerHeight * 0.55, 'ground').setScale(1).refreshBody();
+            platforms.create(window.innerWidth * 0.43, window.innerHeight * 0.42, 'ground').setScale(1).refreshBody();
+
+            player = this.physics.add.sprite(window.innerWidth * 0.1, window.innerHeight * 0.75, 'dude');
+            player.setBounce(0.2);
+            player.setCollideWorldBounds(true);
+
+            this.anims.create({
+                key: 'left',
+                frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
+                frameRate: 10,
+                repeat: -1
+            });
+
+            this.anims.create({
+                key: 'turn',
+                frames: [{ key: 'dude', frame: 4 }],
+                frameRate: 20
+            });
+
+            this.anims.create({
+                key: 'right',
+                frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
+                frameRate: 10,
+                repeat: -1
+            });
+
+            cursors = this.input.keyboard.createCursorKeys();
+
+            stars = this.physics.add.group({
+                key: 'star',
+                repeat: 19,
+                setXY: { x: 12, y: 0, stepX: window.innerWidth / 20 }
+            });
+
+            stars.children.iterate(function (child) {
+                child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+            });
+
+            bombs = this.physics.add.group();
+
+            scoreText = this.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#000' });
+
+            this.physics.add.collider(player, platforms);
+            this.physics.add.collider(stars, platforms);
+            this.physics.add.collider(bombs, platforms);
+
+            this.physics.add.overlap(player, stars, collectStar, null, this);
+            this.physics.add.collider(player, bombs, hitBomb, null, this);
+        }
+
+        function update() {
+            if (gameOver) {
+                return;
+            }
+
+            if (cursors.left.isDown) {
+                player.setVelocityX(-160);
+                player.anims.play('left', true);
+            } else if (cursors.right.isDown) {
+                player.setVelocityX(160);
+                player.anims.play('right', true);
+            } else {
+                player.setVelocityX(0);
+                player.anims.play('turn');
+            }
+
+            if (cursors.up.isDown && player.body.touching.down) {
+                player.setVelocityY(-330);
+            }
+        }
+
+        function collectStar(player, star) {
+            star.disableBody(true, true);
+            score += 5;
+            scoreText.setText('Score: ' + score);
+
+            if (stars.countActive(true) === 0) {
+                stars.children.iterate(function (child) {
+                    child.enableBody(true, child.x, 0, true, true);
+                });
+
+                for (let i = 0; i < 6; i++) {
+                    var x = Phaser.Math.Between(0, window.innerWidth);
+                    var bomb = bombs.create(x, 16, 'bomb');
+                    bomb.setBounce(1);
+                    bomb.setCollideWorldBounds(true);
+                    bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
+                    bomb.allowGravity = false;
+                }
+            }
+        }
+
+        function hitBomb(player, bomb) {
+            this.physics.pause();
+            player.setTint(0xff0000);
+            player.anims.play('turn');
+
+            if (score > highscore) {
+                highscore = score;
+                localStorage.setItem('highscore', highscore);
+            }
+
+            gameOver = true;
+            document.getElementById('endScreen').style.display = 'flex';
+            document.getElementById('finalScore').innerText = 'Your Score: ' + score;
+            document.getElementById('highscore').innerText = 'Highscore: ' + highscore;
+        }
+
+        function startGame() {
+            document.getElementById('startScreen').style.display = 'none';
+        }
+
+        function restartGame() {
+            document.location.reload();
+        }
+
+        window.addEventListener('resize', function () {
+            game.scale.resize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+
+</html>
