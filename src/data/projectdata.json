@@ -1,45 +1,48 @@
 {
   "projects": [
     {
-      "id": "asteroids-3d",
-      "title": "Asteroids 3D",
-      "tagline": "Een moderne 3D-remake van de arcade klassieker.",
-      "description": "Asteroids 3D is een moderne remake van de klassieke arcade game. Het doel was om physics-based movement te combineren met een minimalistische sci-fi stijl. Door veel playtesting vond ik de perfecte balans tussen thrust force, rotation speed en projectile velocity.\n\nTijdens het project focuste ik op iteratief werken en het snel ontwikkelen van speelbare prototypes. Daarbij heb ik veel geleerd over component-based architecture, het gebruik van ScriptableObjects voor game balancing en het implementeren van object pooling voor betere performance.",
-      "thumbnail": "https://picsum.photos/seed/asteroids/1200/600",
-      "youtube": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      "id": "SlimeAttack",
+      "title": "SlimeAttack",
+      "tagline": "A freeforall local multiplayer 2D game",
+      "description": "SlimeAttack is a local multiplayer game where you play as a slime. Explore and move around various platforms inspired by Bobble Battle. Pick up dodgeballs and throw them at other players!",
+      "thumbnail": "https://i.postimg.cc/K82536VJ/Slime-Attack-Intro.png",
+      "youtube": "https://www.youtube.com/embed/E96itL--zVA",
       "screenshots": [
-        "https://picsum.photos/seed/a1/1200/800",
-        "https://picsum.photos/seed/a2/1200/800"
+        "https://i.postimg.cc/qqn4S6p5/Screenshot-2024-12-01-141018.png",
+        "https://i.postimg.cc/Hn5dR8TN/Screenshot-2024-12-01-141030.png",
+        "https://i.postimg.cc/Dz54ZHk1/Screenshot-2026-01-15-104941.png",
+        "https://i.postimg.cc/yx9st37f/Screenshot-2024-12-01-141054.png",
+        "https://i.postimg.cc/5yvbTQfg/Screenshot-2024-12-01-141430.png"
       ],
       "tags": [
         "Unity",
         "C#",
-        "3D",
-        "Physics"
+        "2D",
+        "Local Multiplayer"
       ],
-      "projectRole": "Gameplay Programmer",
-      "timeline": "2 weken",
+      "projectRole": "Full developer + Artist",
+      "timeline": "Own Project",
       "mechanics": [
         {
-          "subtitle": "Movement System",
-          "description": "De speler gebruikt thrust-based movement en smooth rotation, net als klassieke arcade shooters. In plaats van directe positie updates werkt alles met physics forces, wat zorgt voor natuurlijk momentum en inertia. Ook implementeerde ik screen-wrap waarbij je aan de ene kant verdwijnt en aan de andere kant verschijnt.",
-          "image": "https://picsum.photos/seed/e1/1200/800",
-          "code": "void Update()\n{\n    if (Input.GetKey(KeyCode.W))\n        rb.AddForce(transform.up * thrust);\n\n    float rotate = Input.GetAxis(\"Horizontal\");\n    rb.MoveRotation(rb.rotation - rotate * rotateSpeed * Time.deltaTime);\n}"
+          "subtitle": "Multiplayer Spawn System",
+          "description": "Een manager that spawns the player and give it automaticle the right controller id to the player so jou could not move the other players",
+          "image": "https://i.postimg.cc/1tjk9mWz/Screenshot-2026-01-15-110652.png",
+          "code": "private void Awake()\n{\n    int spawnIndex = 0; // Tracks the current spawn point index\n\n    // Iterate over all connected gamepads\n    foreach (var device in Gamepad.all)\n    {\n        if (spawnIndex >= spawnPoints.Length)\n        {\n            Debug.LogWarning(\"Not enough spawn points for the number of connected controllers!\");\n            break;\n        }\n\n        // Spawn a player at the current spawn point\n        GameObject prefabToSpawn = playerPrefabs[spawnIndex % playerPrefabs.Length];\n        GameObject player = Instantiate(prefabToSpawn, spawnPoints[spawnIndex].position, Quaternion.identity);\n\n        // Assign the gamepad to the player\n        var playerInput = player.GetComponent<PlayerInput>();\n        if (playerInput != null)\n        {\n            playerInput.SwitchCurrentControlScheme(device, device);\n            Debug.Log($\"Assigned {device.displayName} to Player {spawnIndex + 1}\");\n        }\n\n        spawnIndex++;\n    }\n}"
         },
         {
-          "subtitle": "Asteroid Spawner",
-          "description": "Asteroïden spawnen in willekeurige groottes, rotaties en snelheid om elke wave uniek te maken. Het spawning systeem gebruikt een sphere-based approach waarbij asteroids altijd buiten het zichtveld verschijnen. Grote asteroids splitsen in kleinere stukken wanneer ze geraakt worden, wat voor dynamische gameplay zorgt.",
-          "image": "https://picsum.photos/seed/e2/1200/800",
-          "code": "void SpawnAsteroid()\n{\n    Vector3 pos = Random.onUnitSphere * spawnRadius;\n    float size = Random.Range(0.5f, 2.5f);\n\n    GameObject ast = Instantiate(asteroidPrefab, pos, Random.rotation);\n    ast.transform.localScale = Vector3.one * size;\n\n    Rigidbody rb = ast.GetComponent<Rigidbody>();\n    rb.AddForce(Random.onUnitSphere * Random.Range(5,15), ForceMode.Impulse);\n}"
+          "subtitle": "Update UI",
+          "description": "This updates the main game UI for the CurrentRounds and PlayerScores",
+          "image": "https://i.postimg.cc/Dz54ZHk1/Screenshot-2026-01-15-104941.png",
+          "code": "public void UpdateUI()\n{\n    roundText.text = $\"Round {GameManager.Instance.currentRound}/{GameManager.Instance.totalRounds}\"; // gets the round amount and shows it at the top of the screen\n\n    for (int i = 0; i < GameManager.Instance.playerScores.Count; i++)\n    {\n        if (i < playerScoreTexts.Length)\n        {\n            playerScoreTexts[i].text = $\"Player {i + 1}: {GameManager.Instance.playerScores[i]} Died\"; // shows the amount of deaths that the player has\n        }\n    }\n}"
         }
       ]
       ,
-      "git": "https://github.com/fvugt/asteroids-3d",
-      "itch": "https://fvugt.itch.io/asteroids-3d"
+      "git": "https://github.com/Daangulitz/Slime-Attack",
+      "itch": "https://daangulitz.itch.io/slimeattack"
     },
     {
-      "id": "xr-escape-room",
-      "title": "XR Escape Room",
+      "id": "XR-Pedition",
+      "title": "XR-Pedition",
       "tagline": "Een VR escape room met physics puzzels en interacties.",
       "description": "Deze XR escape room is ontwikkeld met Unity's XR Interaction Toolkit en plaatst spelers in een mysterieuze kamer vol interactieve puzzels. Elke puzzel kan op meerdere manieren opgelost worden, wat spelers de vrijheid geeft om creatief te denken.\n\nIk wilde onderzoeken hoe je natuurlijke interacties kunt bouwen met VR controllers waarbij physics-based interactions zorgen voor maximale immersion.\n\nHet project richtte zich op drie kernpijlers: natuurlijke object manipulatie, physics-based puzzels en environmental storytelling waarbij de ruimte zelf het verhaal vertelt.",
       "thumbnail": "https://picsum.photos/seed/xr/1200/600",
@@ -55,7 +58,7 @@
         "XR",
         "VR"
       ],
-      "projectRole": "XR Interaction Designer",
+      "projectRole": "AR Developer",
       "timeline": "3 weken",
       "mechanics": [
         {
@@ -67,8 +70,8 @@
       ]
     },
     {
-      "id": "topdown-shooter",
-      "title": "Topdown Shooter",
+      "id": "Project-Timeline",
+      "title": "Project-Timeline",
       "tagline": "Een snelle twin-stick shooter met vijandige AI.",
       "description": "Deze topdown shooter begon als een experiment om enemy AI te bouwen en groeide uit tot een complete arcade-style game. Het doel was om tight, responsive controls te combineren met challenging maar faire enemy behaviors.\n\nLater werd het uitgebreid met verschillende enemy types, wave progression systems en satisfying hit-feedback door screen shake en particle effects te combineren.\n\nHet project hielp mij de basis van AI state machines, navmesh pathfinding en difficulty balancing beter te leren begrijpen.",
       "thumbnail": "https://picsum.photos/seed/shooter/1200/600",
@@ -101,8 +104,8 @@
       ]
     },
     {
-      "id": "vr-training-sim",
-      "title": "VR Training Simulator",
+      "id": "CryoSite",
+      "title": "CryoSite",
       "tagline": "Een realistische VR-training voor industriële procedures.",
       "description": "Deze VR training simulator is gebouwd voor het oefenen van complexe industriële procedures in een volledig veilige virtuele omgeving. Het doel was om een training te creëren die net zo effectief is als hands-on training, maar zonder de risico's en kosten.\n\nDe focus lag op realistische hand-tracking voor natuurlijke interacties, stapsgewijze instructies die gebruikers begeleiden en gedetailleerde feedback op gebruikersacties waarbij immediate feedback het leerproces versterkt.\n\nHet project leerde mij hoe je effectieve VR training ervaringen ontwerpt met verschillende difficulty modes en performance tracking om daadwerkelijk kennisoverdracht te bevorderen.",
       "thumbnail": "https://picsum.photos/seed/vrtrain/1200/600",
@@ -138,8 +141,44 @@
       "itch": ""
     },
     {
-      "id": "ar-museum-guide",
-      "title": "AR Museum Guide",
+      "id": "Rattle & Roll",
+      "title": "Rattle & Roll",
+      "tagline": "Een interactieve AR-applicatie voor museum bezoekers.",
+      "description": "De AR Museum Guide brengt museumtentoonstellingen tot leven door digitale content over fysieke objecten heen te projecteren en transformeert statische kunstwerken in interactieve verhalen. Een Romeins schilderij komt tot leven met animated characters, bij fossielen verschijnen 3D reconstructies.\n\nGebruikers kunnen hun telefoon op kunstwerken richten om extra informatie, 3D modellen en interactieve elementen te zien die historical context bieden op een engaging manier.\n\nDit project introduceerde mij in AR Foundation, image tracking en UI design voor augmented reality waarbij ik leerde werken met verschillende lighting conditions in musea.",
+      "thumbnail": "https://picsum.photos/seed/armuseum/1200/600",
+      "youtube": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      "screenshots": [
+        "https://picsum.photos/seed/arm1/1200/800",
+        "https://picsum.photos/seed/arm2/1200/800"
+      ],
+      "tags": [
+        "Unity",
+        "AR Foundation",
+        "Mobile",
+        "Image Tracking"
+      ],
+      "projectRole": "AR Developer",
+      "timeline": "3 weken",
+      "mechanics": [
+        {
+          "subtitle": "Image Tracking System",
+          "description": "Herkent kunstwerken en plaatst AR content op de juiste posities door gebruik te maken van AR Foundation's image tracking. Wanneer een artwork gedetecteerd wordt, spawned het systeem de bijbehorende content - info panels, 3D modellen of video overlays. De content blijft stabiel geanchored zelfs als de camera beweegt.",
+          "image": "https://placehold.co/600x400?text=Image+Tracking",
+          "code": "void OnTrackedImagesChanged(ARTrackedImagesChangedEventArgs args)\n{\n    foreach (var trackedImage in args.added)\n    {\n        string artworkId = trackedImage.referenceImage.name;\n        SpawnARContent(artworkId, trackedImage.transform);\n    }\n}"
+        },
+        {
+          "subtitle": "Interactive 3D Models",
+          "description": "Gebruikers kunnen 3D modellen roteren en schalen met intuïtive touch gestures - single finger drag roteert, pinch zoom schaalt en two-finger drag verplaatst het model. Sommige modellen zijn animated en kunnen hun functie demonstreren. Custom shaders zorgen dat de modellen natuurlijk blenden met de real world door environment lighting.",
+          "image": "https://placehold.co/600x400?text=3D+Interaction",
+          "code": "void HandleTouchInput()\n{\n    if (Input.touchCount == 2)\n    {\n        Touch t1 = Input.GetTouch(0);\n        Touch t2 = Input.GetTouch(1);\n\n        float pinchDist = Vector2.Distance(t1.position, t2.position);\n        float scale = pinchDist / initialPinchDist;\n\n        model.localScale = initialScale * scale;\n    }\n}"
+        }
+      ],
+      "git": "",
+      "itch": "https://fvugt.itch.io/ar-museum"
+    },
+      {
+      "id": "Replay Platformer",
+      "title": "Replay Platformer",
       "tagline": "Een interactieve AR-applicatie voor museum bezoekers.",
       "description": "De AR Museum Guide brengt museumtentoonstellingen tot leven door digitale content over fysieke objecten heen te projecteren en transformeert statische kunstwerken in interactieve verhalen. Een Romeins schilderij komt tot leven met animated characters, bij fossielen verschijnen 3D reconstructies.\n\nGebruikers kunnen hun telefoon op kunstwerken richten om extra informatie, 3D modellen en interactieve elementen te zien die historical context bieden op een engaging manier.\n\nDit project introduceerde mij in AR Foundation, image tracking en UI design voor augmented reality waarbij ik leerde werken met verschillende lighting conditions in musea.",
       "thumbnail": "https://picsum.photos/seed/armuseum/1200/600",

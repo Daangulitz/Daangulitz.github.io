@@ -1,28 +1,36 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap');
 @import "tailwindcss";
 
 :root {
-  --bg: #0a0a0a;
-  --surface: #0f0f0f;
-  --text: #f5f5f5;
-  --muted: #a3a3a3;
-  --accent: #fb923c;
-  --accent-hover: #ea580c;
-  --accent-text: #000000;
-  --bordercolor: #2b2b2b;
+  /* Base background and surfaces */
+  --bg: #0a0a0a;         
+  --surface: #121212;     
+  
+  /* Text colors */
+  --text: #f5f5f5;      
+  --muted: #b0a3a3;       
+  
+  /* Accent colors (dark red) */
+  --accent: #c0392b;       
+  --accent-hover: #a93226; 
+  --accent-text: #ffffff; 
+  
+  /* Border and divider colors */
+  --bordercolor: #2e2e2e; 
 
   --overlay: rgba(0, 0, 0, 0.6);
   --overlay-hover: rgba(0, 0, 0, 0.8);
 
-  --radius-sm: 0.375rem;
-  --radius-md: 0.75rem;
-  --radius-lg: 1rem;
+  --radius-sm: 0rem;
+  --radius-md: 1rem;
+  --radius-lg: 2rem;
+
+  --shadow-sm: 0 4px 12px rgba(11,15,25,0.06);
+  --shadow-md: 0 12px 30px rgba(11,15,25,0.12);
+  --shadow-lg: 0 30px 80px rgba(11,15,25,0.18);
+
   
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 10px 30px rgba(251, 146, 60, 0.1);
-  
-  --font-main: "Roboto", sans-serif; 
+  --font-main: "Merriweather", sans-serif; 
 }
 
 body {
