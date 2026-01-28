@@ -14,12 +14,7 @@
         "https://i.postimg.cc/yx9st37f/Screenshot-2024-12-01-141054.png",
         "https://i.postimg.cc/5yvbTQfg/Screenshot-2024-12-01-141430.png"
       ],
-      "tags": [
-        "Unity",
-        "C#",
-        "2D",
-        "Local Multiplayer"
-      ],
+      "tags": ["Unity", "C#", "2D", "Local Multiplayer"],
       "projectRole": "Full developer + Artist",
       "timeline": "Own Project",
       "mechanics": [
@@ -35,182 +30,128 @@
           "image": "https://i.postimg.cc/Dz54ZHk1/Screenshot-2026-01-15-104941.png",
           "code": "public void UpdateUI()\n{\n    roundText.text = $\"Round {GameManager.Instance.currentRound}/{GameManager.Instance.totalRounds}\"; // gets the round amount and shows it at the top of the screen\n\n    for (int i = 0; i < GameManager.Instance.playerScores.Count; i++)\n    {\n        if (i < playerScoreTexts.Length)\n        {\n            playerScoreTexts[i].text = $\"Player {i + 1}: {GameManager.Instance.playerScores[i]} Died\"; // shows the amount of deaths that the player has\n        }\n    }\n}"
         }
-      ]
-      ,
+      ],
       "git": "https://github.com/Daangulitz/Slime-Attack",
       "itch": "https://daangulitz.itch.io/slimeattack"
     },
     {
       "id": "XR-Pedition",
-      "title": "XR-Pedition",
-      "tagline": "Een VR escape room met physics puzzels en interacties.",
-      "description": "Deze XR escape room is ontwikkeld met Unity's XR Interaction Toolkit en plaatst spelers in een mysterieuze kamer vol interactieve puzzels. Elke puzzel kan op meerdere manieren opgelost worden, wat spelers de vrijheid geeft om creatief te denken.\n\nIk wilde onderzoeken hoe je natuurlijke interacties kunt bouwen met VR controllers waarbij physics-based interactions zorgen voor maximale immersion.\n\nHet project richtte zich op drie kernpijlers: natuurlijke object manipulatie, physics-based puzzels en environmental storytelling waarbij de ruimte zelf het verhaal vertelt.",
-      "thumbnail": "https://picsum.photos/seed/xr/1200/600",
+      "title": "ColorMadness",
+      "tagline": "A XR experince to see what people see that are colorblind",
+      "description": "This experince is made for a museum project the University of Utrecht Museum here the had multiple expeditions about what the do in the univeristy as a team of 6 we chose that we wanted to do something with color blind so people can see what other people will see when there are color blind in the world",
+      "thumbnail": "https://i.postimg.cc/WzHXmfxY/Poster-Versie2.png",
       "youtube": "https://www.youtube.com/embed/dQw4w9WgXcQ",
       "screenshots": [
         "https://picsum.photos/seed/xr1/1200/800",
         "https://picsum.photos/seed/xr2/1200/800",
         "https://picsum.photos/seed/xr3/1200/800"
       ],
-      "tags": [
-        "Unity",
-        "C#",
-        "XR",
-        "VR"
-      ],
-      "projectRole": "AR Developer",
-      "timeline": "3 weken",
+      "tags": ["Unity", "C#", "XR", "Mixed Reality"],
+      "projectRole": "XR Developer",
+      "timeline": "5 weeks",
       "mechanics": [
         {
-          "subtitle": "Grab Interaction",
-          "description": "Objecten worden fysiek opgepakt door middel van XR Grab Interactables waarbij physics properties dynamisch worden aangepast. Voor kleine objecten gebruik ik precision grabs, terwijl grote objecten velocity-based grabs gebruiken die natuurlijker aanvoelen. De throw mechanic tracked controller velocity over meerdere frames voor realistische gooibewegingen.",
+          "subtitle": "ResetGame",
+          "description": "This resets the game fully with the color filter change slow fade of the old colorfilter and resets you back to the main menu screen",
           "image": "https://placehold.co/600x400?text=Grab",
-          "code": "public void OnSelectEntered(SelectEnterEventArgs args)\n{\n    grabbed = true;\n    rb.isKinematic = true;\n}\n\npublic void OnSelectExited(SelectExitEventArgs args)\n{\n    grabbed = false;\n    rb.isKinematic = false;\n}"
+          "code": "private IEnumerator Resetgame(float time)\n{\n    Texture2D activeLUT = (Texture2D)colorLookup.texture.value;\n    float startContribution = colorLookup.contribution.value;\n\n    float elapsed = 0f;\n\n    while (elapsed < time)\n    {\n        elapsed += Time.deltaTime;\n        float pct = elapsed / time;\n        \n        colorLookup.contribution.value = Mathf.Lerp(startContribution, 0f, pct);\n        colorLookup.texture.value = activeLUT;\n\n        float w = Mathf.Lerp(startContribution, 0f, pct);\n        passthroughLayer.SetColorLut(new OVRPassthroughColorLut(activeLUT, flipY: false), w);\n\n        yield return null;\n    }\n    \n    colorLookup.contribution.value = 0f;\n    passthroughLayer.SetColorLut(new OVRPassthroughColorLut(activeLUT, flipY: false), 0f);\n\n    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);\n}"
+        },
+        {
+          "subtitle": "Smoothie Glass Shader Fill",
+          "description": "This fills the glass to look like the glass is being filled before you give it to the customer",
+          "image": "https://placehold.co/600x400?text=Grab",
+          "code": "private IEnumerator SmoothFill(float targetfill, float duration)\n{\n    float startfill = matfill;\n    float time = 0f;\n\n    while (time < duration)\n    {\n        time += Time.deltaTime;\n        matfill = Mathf.Lerp(startfill, targetfill, time / duration);\n\n        if (material != null)\n        {\n            material.SetFloat(\"_Fill\", matfill);\n        }\n        \n        yield return null;\n    }\n}"
         }
-      ]
+      ],
+      "git": "https://github.com/Daangulitz/XRpedition-team-10",
+      "itch": "https://daangulitz.itch.io/colormadness"
     },
     {
       "id": "Project-Timeline",
       "title": "Project-Timeline",
-      "tagline": "Een snelle twin-stick shooter met vijandige AI.",
-      "description": "Deze topdown shooter begon als een experiment om enemy AI te bouwen en groeide uit tot een complete arcade-style game. Het doel was om tight, responsive controls te combineren met challenging maar faire enemy behaviors.\n\nLater werd het uitgebreid met verschillende enemy types, wave progression systems en satisfying hit-feedback door screen shake en particle effects te combineren.\n\nHet project hielp mij de basis van AI state machines, navmesh pathfinding en difficulty balancing beter te leren begrijpen.",
-      "thumbnail": "https://picsum.photos/seed/shooter/1200/600",
-      "youtube": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "tagline": "A fast-paced first-person roguelike in space.",
+      "description": "This is a first-person roguelike shooter developed in Unreal Engine using both Blueprints and C++. The goal of the project was to create a fast-paced, responsive shooter featuring challenging enemy AI and a wide variety of weapons. Players navigate through procedurally generated levels while fighting waves of enemies.Through this project, I learned how to design effective AI behaviors using behavior trees and blackboards, as well as how to implement a dynamic weapon and damage system. I also gained experience in creating diverse boss encounters. Overall, this project strengthened my skills in both Blueprints and C++, and deepened my understanding of level design and game balance.",
+      "thumbnail": "https://i.postimg.cc/YC7hXYT6/Project-Timeline-Thumail.png",
+      "youtube": "https://www.youtube.com/embed/_OoYvTk-WwY?si=GVNVWLRZz7Lk47HR",
       "screenshots": [
         "https://picsum.photos/seed/shooter1/1200/800",
         "https://picsum.photos/seed/shooter2/1200/800"
       ],
-      "tags": [
-        "Unity",
-        "C#",
-        "AI",
-        "Topdown"
-      ],
-      "projectRole": "Programmer",
-      "timeline": "1 week",
+      "tags": ["Unreal", "BluePrints", "C++", "Roguelike", "FirstPerson"],
+      "projectRole": "Programmer, Artist, SoundDesign",
+      "timeline": "3 weeks school, to own project",
       "mechanics": [
         {
-          "subtitle": "Enemy AI State Machine",
-          "description": "Een finite state machine voor vijanden die dynamisch schakelt tussen Idle → Chase → Attack → Retreat states. In Chase gebruiken enemies navmesh pathfinding, in Attack positioneren ze zich tactisch, en in Retreat trekken ze zich terug naar cover bij lage health. Verschillende enemy types hebben eigen parameters voor aggression range en attack patterns.",
-          "image": "https://placehold.co/600x400?text=Enemy+AI",
-          "code": "void Update()\n{\n    switch(state)\n    {\n        case Idle:\n            LookForPlayer();\n            break;\n\n        case Chase:\n            MoveTowardPlayer();\n            break;\n\n        case Attack:\n            TryShoot();\n            break;\n    }\n}"
+          "subtitle": "Damage system",
+          "description": "This is the Damage take system that i use for every enemy and for every boss.",
+          "image": "https://i.postimg.cc/L8wShpR8/Screenshot-2026-01-21-153958.png",
+          "blueprintImage": "https://i.postimg.cc/tTVwfZVr/Gif-Enemy-Hit.gif"
         },
         {
-          "subtitle": "Projectile System",
-          "description": "Hit-detection via raycasts met instant feedback - veel sneller en accurater dan physics-based projectiles. De raycast spawned een hit effect op het impact point en gebruikt layer masks om te bepalen wat geraakt kan worden. Elk schot krijgt een tracer effect die de bullet path visualiseert.",
-          "image": "https://placehold.co/600x400?text=Projectile",
-          "code": "void Shoot()\n{\n    Ray ray = new Ray(transform.position, transform.forward);\n\n    if (Physics.Raycast(ray, out var hit, 50f))\n    {\n        Debug.Log($\"Hit {hit.collider.name}\");\n    }\n}"
+          "subtitle": "Boss move to player",
+          "description": "This is how a boss follows the Player when the player is in range of the boss",
+          "image": "https://i.postimg.cc/J0pFHNw1/Screenshot-2026-01-19-120005.png",
+          "blueprintImage": "https://i.postimg.cc/dt769Pr4/0122.gif"
         }
-      ]
+      ],
+      "git": "https://github.com/Daangulitz/Project-Timeline",
+      "itch": ""
     },
     {
       "id": "CryoSite",
       "title": "CryoSite",
-      "tagline": "Een realistische VR-training voor industriële procedures.",
-      "description": "Deze VR training simulator is gebouwd voor het oefenen van complexe industriële procedures in een volledig veilige virtuele omgeving. Het doel was om een training te creëren die net zo effectief is als hands-on training, maar zonder de risico's en kosten.\n\nDe focus lag op realistische hand-tracking voor natuurlijke interacties, stapsgewijze instructies die gebruikers begeleiden en gedetailleerde feedback op gebruikersacties waarbij immediate feedback het leerproces versterkt.\n\nHet project leerde mij hoe je effectieve VR training ervaringen ontwerpt met verschillende difficulty modes en performance tracking om daadwerkelijk kennisoverdracht te bevorderen.",
-      "thumbnail": "https://picsum.photos/seed/vrtrain/1200/600",
-      "youtube": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      "tagline": "A VR multiplayer shooter",
+      "description": "This multiplayer shooter was developed during the final four weeks of my school year as a capstone project. The game is set in a science-fiction environment inside a research facility where experiments on alien creatures went wrong, causing the facility’s robots to go rogue. The player’s mission is to eliminate the remnants of these failed experiments and regain control of the facility.Through this project, I gained valuable experience in developing VR multiplayer gameplay, including the challenges of synchronization, performance, and player interaction in virtual reality. For networking, we used Mirror, which significantly deepened my understanding of multiplayer systems and networked game development.",
+      "thumbnail": "https://i.postimg.cc/VsRX8w0x/posterfinal.png",
+      "youtube": "https://www.youtube.com/embed/SCHRtTqZz6c?si=uCkVgPFJlD8sVX-j",
       "screenshots": [
         "https://picsum.photos/seed/vrt1/1200/800",
         "https://picsum.photos/seed/vrt2/1200/800",
         "https://picsum.photos/seed/vrt3/1200/800"
       ],
-      "tags": [
-        "Unity",
-        "VR",
-        "Hand Tracking",
-        "Training"
-      ],
-      "projectRole": "VR Developer",
-      "timeline": "4 weken",
+      "tags": ["Unity", "VR", "OnlineMultiplayer", "C#"],
+      "projectRole": "Developer",
+      "timeline": "4 weeks",
       "mechanics": [
         {
-          "subtitle": "Step-by-Step Guide System",
-          "description": "Een dynamisch instructiesysteem dat de gebruiker door complexe multi-step procedures leidt met real-time visual guidance. Elke step heeft validation criteria die checken of de actie correct is uitgevoerd. In guided mode krijg je hints als je te lang stilstaat, terwijl advanced mode minimale assists heeft voor realistischere training.",
-          "image": "https://placehold.co/600x400?text=Guide+System",
-          "code": "public class StepGuide : MonoBehaviour\n{\n    public List<TrainingStep> steps;\n    private int currentStep = 0;\n\n    void CheckStepCompletion()\n    {\n        if (steps[currentStep].IsCompleted())\n        {\n            currentStep++;\n            ShowNextInstruction();\n        }\n    }\n}"
+          "subtitle": "PickUp System",
+          "description": "This is a pickup system for ammo and health pickups in vr the player can collide with a projector and then you pick up the item.",
+          "image": "https://i.postimg.cc/vTkVNYcd/Mag-Pickup.gif",
+          "code":  "public class AmmoPickup : MonoBehaviour\n{\n    private GameManager GM;\n    [SerializeField] private AudioSource audioSource;\n    \n    private void Update()\n    {\n        if (GM == null)\n        {\n            GM = FindFirstObjectByType<GameManager>();\n        }\n    }\n\n    private void OnTriggerEnter(Collider other)\n    {\n        if (!other.CompareTag(\"Player\")) return;\n        \n        GM.AddMag();\n        audioSource.Play();\n        Destroy(gameObject);\n    }\n}"
         },
         {
-          "subtitle": "Hand Tracking Validation",
-          "description": "Controleert of handposities en hand poses correct zijn voor specifieke acties door palm orientation en finger positions te valideren. Wanneer je grip incorrect is, verschijnt een ghost hand overlay die de correcte positie toont. Dit is veel effectiever dan tekstuele instructies omdat mensen de juiste pose kunnen imiteren.",
-          "image": "https://placehold.co/600x400?text=Hand+Tracking",
-          "code": "bool ValidateHandPose(HandPose required)\n{\n    float similarity = Vector3.Dot(\n        currentPose.palmNormal,\n        required.palmNormal\n    );\n\n    return similarity > 0.95f;\n}"
+          "subtitle": "Magazine Eject System",
+          "description": "This system ejects the magazine from the gun when the player presses the eject button on the controller.",
+          "image": "https://i.postimg.cc/JnWpzBCM/Mag-Eject.gif",
+          "code": "private void TryEjectMagazine()\n{\n    if (magSnapZone == null)\n    {\n        Debug.LogWarning(\"Magazine SnapZone not assigned.\");\n        return;\n    }\n\n    Grabbable grabbedMag = magSnapZone.HeldItem;\n\n    if (grabbedMag != null)\n    {\n        magSnapZone.ReleaseAll();\n        EjectSound.Play();\n\n        Rigidbody rb = grabbedMag.GetComponent<Rigidbody>();\n        if (rb != null)\n        {\n            rb.AddForce(transform.right * 3f + transform.up * 0.5f, ForceMode.Impulse);\n        }\n\n        Debug.Log(\"Magazine ejected.\");\n    }\n}"
         }
       ],
-      "git": "https://github.com/fvugt/vr-training-sim",
-      "itch": ""
+      "git": "https://github.com/jensmonne/CryoSite",
+      "itch": "https://jensmonne.itch.io/cryosite-dev-build"
     },
     {
       "id": "Rattle & Roll",
       "title": "Rattle & Roll",
-      "tagline": "Een interactieve AR-applicatie voor museum bezoekers.",
-      "description": "De AR Museum Guide brengt museumtentoonstellingen tot leven door digitale content over fysieke objecten heen te projecteren en transformeert statische kunstwerken in interactieve verhalen. Een Romeins schilderij komt tot leven met animated characters, bij fossielen verschijnen 3D reconstructies.\n\nGebruikers kunnen hun telefoon op kunstwerken richten om extra informatie, 3D modellen en interactieve elementen te zien die historical context bieden op een engaging manier.\n\nDit project introduceerde mij in AR Foundation, image tracking en UI design voor augmented reality waarbij ik leerde werken met verschillende lighting conditions in musea.",
-      "thumbnail": "https://picsum.photos/seed/armuseum/1200/600",
-      "youtube": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      "tagline": "A Rally racing game with motion simulator support",
+      "description": "Rattle & Roll is a VR rally racing experience designed for use with a Yaw 3 motion simulator. The game features a big sandbox enviromnt with a lot of bumbs to feel the fun of the motion simulator.",
+      "thumbnail": "https://i.postimg.cc/m269Gc2g/Screenshot-2026-01-28-081505.png",
+      "youtube": "https://youtube.com/embed/1sLr7j3390k?si=mmE0K9P33Zycrm6F",
       "screenshots": [
         "https://picsum.photos/seed/arm1/1200/800",
         "https://picsum.photos/seed/arm2/1200/800"
       ],
-      "tags": [
-        "Unity",
-        "AR Foundation",
-        "Mobile",
-        "Image Tracking"
-      ],
-      "projectRole": "AR Developer",
-      "timeline": "3 weken",
+      "tags": ["Unity", "Motion Simulator", "VR", "C#"],
+      "projectRole": "Developer",
+      "timeline": "4 weeks",
       "mechanics": [
         {
-          "subtitle": "Image Tracking System",
-          "description": "Herkent kunstwerken en plaatst AR content op de juiste posities door gebruik te maken van AR Foundation's image tracking. Wanneer een artwork gedetecteerd wordt, spawned het systeem de bijbehorende content - info panels, 3D modellen of video overlays. De content blijft stabiel geanchored zelfs als de camera beweegt.",
-          "image": "https://placehold.co/600x400?text=Image+Tracking",
-          "code": "void OnTrackedImagesChanged(ARTrackedImagesChangedEventArgs args)\n{\n    foreach (var trackedImage in args.added)\n    {\n        string artworkId = trackedImage.referenceImage.name;\n        SpawnARContent(artworkId, trackedImage.transform);\n    }\n}"
-        },
-        {
-          "subtitle": "Interactive 3D Models",
-          "description": "Gebruikers kunnen 3D modellen roteren en schalen met intuïtive touch gestures - single finger drag roteert, pinch zoom schaalt en two-finger drag verplaatst het model. Sommige modellen zijn animated en kunnen hun functie demonstreren. Custom shaders zorgen dat de modellen natuurlijk blenden met de real world door environment lighting.",
-          "image": "https://placehold.co/600x400?text=3D+Interaction",
-          "code": "void HandleTouchInput()\n{\n    if (Input.touchCount == 2)\n    {\n        Touch t1 = Input.GetTouch(0);\n        Touch t2 = Input.GetTouch(1);\n\n        float pinchDist = Vector2.Distance(t1.position, t2.position);\n        float scale = pinchDist / initialPinchDist;\n\n        model.localScale = initialScale * scale;\n    }\n}"
+          "subtitle": "Gear up system",
+          "description": "This system handles the gear up input from the player and changes the gear accordingly the gear down works almost the same but the other way around.",
+          "image": "https://i.postimg.cc/7h3KW3yZ/Gear-up-Rattle-and-roll.gif",
+          "code": "private void HandleGearUp(InputAction.CallbackContext ctx)\n{\n    int next = currentGearIndex;\n    if (currentGearIndex == 1) next = 0; // R -> N\n    else if (currentGearIndex == 0) next = 2; // N -> 1st\n    else if (currentGearIndex < gearRatios.Length - 1) next++;\n\n    TrySetGear(next);\n}"
         }
       ],
-      "git": "",
-      "itch": "https://fvugt.itch.io/ar-museum"
-    },
-      {
-      "id": "Replay Platformer",
-      "title": "Replay Platformer",
-      "tagline": "Een interactieve AR-applicatie voor museum bezoekers.",
-      "description": "De AR Museum Guide brengt museumtentoonstellingen tot leven door digitale content over fysieke objecten heen te projecteren en transformeert statische kunstwerken in interactieve verhalen. Een Romeins schilderij komt tot leven met animated characters, bij fossielen verschijnen 3D reconstructies.\n\nGebruikers kunnen hun telefoon op kunstwerken richten om extra informatie, 3D modellen en interactieve elementen te zien die historical context bieden op een engaging manier.\n\nDit project introduceerde mij in AR Foundation, image tracking en UI design voor augmented reality waarbij ik leerde werken met verschillende lighting conditions in musea.",
-      "thumbnail": "https://picsum.photos/seed/armuseum/1200/600",
-      "youtube": "https://www.youtube.com/embed/dQw4w9WgXcQ",
-      "screenshots": [
-        "https://picsum.photos/seed/arm1/1200/800",
-        "https://picsum.photos/seed/arm2/1200/800"
-      ],
-      "tags": [
-        "Unity",
-        "AR Foundation",
-        "Mobile",
-        "Image Tracking"
-      ],
-      "projectRole": "AR Developer",
-      "timeline": "3 weken",
-      "mechanics": [
-        {
-          "subtitle": "Image Tracking System",
-          "description": "Herkent kunstwerken en plaatst AR content op de juiste posities door gebruik te maken van AR Foundation's image tracking. Wanneer een artwork gedetecteerd wordt, spawned het systeem de bijbehorende content - info panels, 3D modellen of video overlays. De content blijft stabiel geanchored zelfs als de camera beweegt.",
-          "image": "https://placehold.co/600x400?text=Image+Tracking",
-          "code": "void OnTrackedImagesChanged(ARTrackedImagesChangedEventArgs args)\n{\n    foreach (var trackedImage in args.added)\n    {\n        string artworkId = trackedImage.referenceImage.name;\n        SpawnARContent(artworkId, trackedImage.transform);\n    }\n}"
-        },
-        {
-          "subtitle": "Interactive 3D Models",
-          "description": "Gebruikers kunnen 3D modellen roteren en schalen met intuïtive touch gestures - single finger drag roteert, pinch zoom schaalt en two-finger drag verplaatst het model. Sommige modellen zijn animated en kunnen hun functie demonstreren. Custom shaders zorgen dat de modellen natuurlijk blenden met de real world door environment lighting.",
-          "image": "https://placehold.co/600x400?text=3D+Interaction",
-          "code": "void HandleTouchInput()\n{\n    if (Input.touchCount == 2)\n    {\n        Touch t1 = Input.GetTouch(0);\n        Touch t2 = Input.GetTouch(1);\n\n        float pinchDist = Vector2.Distance(t1.position, t2.position);\n        float scale = pinchDist / initialPinchDist;\n\n        model.localScale = initialScale * scale;\n    }\n}"
-        }
-      ],
-      "git": "",
-      "itch": "https://fvugt.itch.io/ar-museum"
+      "git": "https://github.com/jensmonne/Rattle-N-Roll"
     }
   ]
 }

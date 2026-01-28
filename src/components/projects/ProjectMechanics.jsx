@@ -20,25 +20,47 @@ export default function ProjectMechanics({ project }) {
           </div>
 
           {/* Code + Image Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-[65%_35%] gap-4">
-            {/* Code block with syntax highlighting */}
-            <div className="h-60 overflow-auto rounded-lg">
-              <SyntaxHighlighter
-                language="csharp"
-                style={vscDarkPlus}
-                customStyle={{
-                  margin: 0,
-                  borderRadius: "0.5rem",
-                  fontSize: "1rem",
-                  height: "100%",
-                }}
-                showLineNumbers={true}>
-                {m.code}
-              </SyntaxHighlighter>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-[75%_25%] gap-4">
+            {/* Left side - Code block or Image */}
+            {m.code && (
+              <div className="h-60 overflow-auto rounded-lg">
+                <SyntaxHighlighter
+                  language="csharp"
+                  style={vscDarkPlus}
+                  customStyle={{
+                    margin: 0,
+                    borderRadius: "0.5rem",
+                    fontSize: "1rem",
+                    height: "100%",
+                  }}
+                  showLineNumbers={true}>
+                  {m.code}
+                </SyntaxHighlighter>
+              </div>
+            )}
 
-            {/* Preview image */}
-            {m.image && (
+            {!m.code && m.image && (
+              <a href={m.image} target="_blank" rel="noopener noreferrer">
+                <img
+                  src={m.image}
+                  alt={m.subtitle}
+                  className="w-full h-60 object-cover rounded-lg cursor-pointer hover:opacity-80 transition-opacity"
+                />
+              </a>
+            )}
+
+            {!m.code && m.blueprintImage && (
+              <a href={m.blueprintImage} target="_blank" rel="noopener noreferrer">
+                <img
+                  src={m.blueprintImage}
+                  alt={`${m.subtitle} Blueprint`}
+                  className="w-full h-60 object-cover rounded-lg cursor-pointer hover:opacity-80 transition-opacity"
+                />
+              </a>
+            )}
+
+            {/* Right side - Preview image */}
+            {m.code && m.image && (
               <a href={m.image} target="_blank" rel="noopener noreferrer">
                 <img
                   src={m.image}

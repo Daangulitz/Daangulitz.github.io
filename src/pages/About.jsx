@@ -11,7 +11,7 @@ export default function About() {
   return (
     <div className="py-12 px-4">
       <div className="text-center mb-12">
-        <h1 className="text-5xl font-bold text-(--text) mb-4">Over mij</h1>
+        <h1 className="text-5xl font-bold text-(--text) mb-4">About me</h1>
         <p className="text-xl text-(--muted) max-w-2xl mx-auto">{siteConfig.tagline}</p>
       </div>
 

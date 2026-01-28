@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "Daan Gulitz",
   role: "XR Developer",
   tagline: "Ik bouw interactieve XR-ervaringen die zich natuurlijk en intuïtief aanvoelen.",
-  aboutImage: "https://api.dicebear.com/7.x/notionists/png?seed=portfolio",
+  aboutImage: "https://i.postimg.cc/c4tg0WGq/Main-Picture-Portfolio-Daan.png",
   cv: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
 
   socials: {

@@ -51,7 +51,7 @@ export default function Header() {
                 : "text-(--muted) hover:text-(--text)"
             }`}
           >
-            Over Mij
+            About me
           </Link>
 
           <Link
