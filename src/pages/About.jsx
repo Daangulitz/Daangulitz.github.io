@@ -56,7 +56,7 @@ export default function About() {
           <div className="flex flex-col gap-8 lg:flex-2">
             {/* Bio */}
             <section className="bg-(--surface) border border-(--bordercolor) rounded-lg p-8">
-              <h2 className="text-2xl font-semibold text-(--text) mb-6">Mijn Verhaal</h2>
+              <h2 className="text-2xl font-semibold text-(--text) mb-6">My Story</h2>
               <div className="space-y-4">
                 {paragraphs.map((text, i) => (
                   <p key={i} className="text-(--muted) leading-relaxed">

@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: "Daan Gulitz",
-  role: "XR Developer",
-  tagline: "Ik bouw interactieve XR-ervaringen die zich natuurlijk en intuïtief aanvoelen.",
+  role: "Game/XR Developer",
+  tagline: "I build immersive VR/AR and Game experiences .",
   aboutImage: "https://i.postimg.cc/c4tg0WGq/Main-Picture-Portfolio-Daan.png",
   cv: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
 
@@ -12,14 +12,12 @@ export const siteConfig = {
   },
 
   aboutLong: `
-    Ik ben een XR Developer die energie krijgt van het bouwen van interactieve, 
-    fysieke en intuïtieve ervaringen in VR en AR. Voor mij draait goede XR niet 
-    alleen om technologie, maar vooral om hoe gebruikers een digitale wereld 
-    *voelen*. Ik werk graag iteratief met prototypes: snel testen, verbeteren en 
-    opnieuw testen — net zo lang tot interacties natuurlijk en prettig aanvoelen.
+I am a Game/XR developer who loves to explore new things and turn them into experiences that players will not soon forget. 
+I enjoy using both new and old techniques to create beautiful projects that are accessible to everyone. 
+I like to work on prototypes so that I can test them and then improve them until they feel right for everyone.
   `,
 
-  softSkills: ["Samenwerken met artists", "Feedback geven & ontvangen", "Probleemoplossend denken"],
+  softSkills: ["Scrum", "Giving and taking feedback", "Thinking out of the box", "Creative problem solving", "Working with artists"],
 
-  hardSkills: ["Unity & XR Interaction Toolkit", "C# Scripting", "Git & Version Control"],
+  hardSkills: ["Unity","Unreal Engine", "C# Scripting", "Git & Version Control"],
 };

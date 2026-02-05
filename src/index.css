@@ -2,32 +2,39 @@
 @import "tailwindcss";
 
 :root {
+  /* Custom palette */
+  --onyx: #171614;
+  --dark-coffee: #3a2618;
+  --dusty-taupe: #9a8873;
+  --dim-grey: #696558;
+  --charcoal-brown: #37423d;
+  
   /* Base background and surfaces */
-  --bg: #0a0a0a;         
-  --surface: #121212;     
+  --bg: #171614;         
+  --surface: #1f1e1c;     
   
   /* Text colors */
-  --text: #f5f5f5;      
-  --muted: #b0a3a3;       
+  --text: #ffffff;      
+  --muted: #b0a3a3; 
   
-  /* Accent colors (dark red) */
-  --accent: #c0392b;       
-  --accent-hover: #a93226; 
+  /* Accent colors */
+  --accent: #9a8873;       
+  --accent-hover: #a89881; 
   --accent-text: #ffffff; 
   
   /* Border and divider colors */
-  --bordercolor: #2e2e2e; 
+  --bordercolor: #3a2618; 
 
-  --overlay: rgba(0, 0, 0, 0.6);
-  --overlay-hover: rgba(0, 0, 0, 0.8);
+  --overlay: rgba(23, 22, 20, 0.7);
+  --overlay-hover: rgba(23, 22, 20, 0.9);
 
   --radius-sm: 0rem;
   --radius-md: 1rem;
   --radius-lg: 2rem;
 
-  --shadow-sm: 0 4px 12px rgba(11,15,25,0.06);
-  --shadow-md: 0 12px 30px rgba(11,15,25,0.12);
-  --shadow-lg: 0 30px 80px rgba(11,15,25,0.18);
+  --shadow-sm: 0 4px 12px rgba(23, 22, 20, 0.3);
+  --shadow-md: 0 12px 30px rgba(23, 22, 20, 0.4);
+  --shadow-lg: 0 30px 80px rgba(23, 22, 20, 0.5);
 
   
   --font-main: "Merriweather", sans-serif; 
