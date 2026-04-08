@@ -43,8 +43,7 @@ export default function ProjectGallery({ project }) {
               <img
                 src={slides[currentIndex].src}
                 alt={`Slide ${currentIndex + 1}`}
-                className="w-full h-full object-cover cursor-pointer"
-                onClick={() => window.open(slides[currentIndex].src, "_blank")}
+                className="w-full h-full object-cover pointer-events-none"
               />
             )}
           </div>

@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "Daan Gulitz",
   role: "Game/XR Developer",
   tagline: "I build immersive VR/AR and Game experiences .",
-  aboutImage: "https://i.postimg.cc/c4tg0WGq/Main-Picture-Portfolio-Daan.png",
+  aboutImage: "https://i.postimg.cc/tR6NDFpd/IMG-2463.jpg",
   cv: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
 
   socials: {

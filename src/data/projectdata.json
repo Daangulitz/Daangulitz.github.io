@@ -152,6 +152,55 @@
         }
       ],
       "git": "https://github.com/jensmonne/Rattle-N-Roll"
+    },
+    {
+      "id": "JohnSprint",
+      "title": "JohnSprint",
+      "tagline": "A fast-paced sprinting game",
+      "description": "John Sprint is a gamejam game that we made in 3 days for the global gamejam 2026 the theme was masks and we made a game where you have to sprint as fast as you can to the finish line while avoiding obstacles after 3 levels where finished you would select a extra mask as a power up but also as your health if you got hit by something you would loss the mask.",
+      "thumbnail": "https://i.postimg.cc/Y0VSJv6c/H0wlbg.png",
+      "screenshots": [
+        "https://i.postimg.cc/FRwR6fgX/vdcf3O.png",
+        "https://i.postimg.cc/wBGTttr8/Wf5Ucd.png",
+        "https://i.postimg.cc/903mp6C5/UVGKy-K.png",
+        "https://i.postimg.cc/ncJVQf3q/tz-2Bz-Bs.png",
+        "https://i.postimg.cc/Dwf2Bdkq/ODwzp-B.png",
+        "https://i.postimg.cc/kGFmyDTF/7m-ULno.png"
+      ],
+      "tags": ["Unity", "GameJam", "2D", "C#","platformer"],
+      "projectRole": "Developer",
+      "timeline": "3 days",
+      "mechanics": [
+        {
+          "subtitle": "Remove Mask System",
+          "description": "This system handles the removal of masks from the player character.",
+          "image": "https://i.postimg.cc/ncJVQf3q/tz-2Bz-Bs.png",
+          "code": "private void RemoveSpecificMask(int idToRemove)\n{\n    List<Mask> temp = gm.masks.ToList();\n    Mask toRemove = temp.FirstOrDefault(m => m.id == idToRemove);\n\n    if (toRemove != null)\n    {\n        temp.Remove(toRemove);\n        gm.masks.Clear();\n        temp.Reverse();\n        foreach (var m in temp)\n        {\n            gm.masks.Push(m);\n        }\n    }\n}"
+        }
+      ],
+      "git": "https://github.com/Daangulitz/Global-game-jam-26",
+      "itch": "https://fienthedestroyer.itch.io/john-sprint"
+    },
+    {
+      "id": "Oasis Summit",
+      "title": "Oasis Summit",
+      "tagline": "A immersive installation project for Oasis Summit 2026 in the Netherlands", 
+      "description": "Oasis Summit is an immersive installation project created for the Oasis Summit 2026 event in the Netherlands Rotterdam. We created a immersive instalation with a team of 40 people where we build the installation for the television compeny AVROTROS the installation was about the programm called 'maestro' where famous dutch people are conducting an orchestra. The installation that we made needed to let people feel like they are the conductor of the orchesta.",
+      "thumbnail": "https://i.postimg.cc/Y0VSJv6c/H0wlbg.png",
+      "screenshots": [
+        "https://i.postimg.cc/FRwR6fgX/vdcf3O.png",
+        "https://i.postimg.cc/wBGTttr8/Wf5Ucd.png",
+        "https://i.postimg.cc/903mp6C5/UVGKy-K.png",
+        "https://i.postimg.cc/ncJVQf3q/tz-2Bz-Bs.png",
+        "https://i.postimg.cc/Dwf2Bdkq/ODwzp-B.png",
+        "https://i.postimg.cc/kGFmyDTF/7m-ULno.png"
+      ],
+      "tags": ["Unity", "Immersive", "C#"],
+      "projectRole": "Developer",
+      "timeline": "2 weeks",
+      
+      "git": "https://github.com/Daangulitz/Global-game-jam-26",
+      "itch": "https://fienthedestroyer.itch.io/john-sprint"
     }
   ]
 }

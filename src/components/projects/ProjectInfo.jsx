@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function ProjectInfo({ project }) {
   const paragraphs = project.description.split("\n\n");
 
@@ -37,9 +39,13 @@ export default function ProjectInfo({ project }) {
               <span className="font-medium text-[var(--text)]">Tags</span>
               <div className="flex flex-wrap gap-1.5 justify-end">
                 {project.tags.map((tag) => (
-                  <span key={tag} className="tag">
+                  <Link
+                    key={tag}
+                    to={`/?tag=${encodeURIComponent(tag)}`}
+                    className="px-2 py-1 text-xs bg-[var(--accent)] text-white rounded-md hover:opacity-90 transition-opacity"
+                  >
                     {tag}
-                  </span>
+                  </Link>
                 ))}
               </div>
             </li>

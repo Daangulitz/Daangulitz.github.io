@@ -3,30 +3,30 @@
 
 :root {
   /* Custom palette */
-  --onyx: #171614;
-  --dark-coffee: #3a2618;
-  --dusty-taupe: #9a8873;
-  --dim-grey: #696558;
-  --charcoal-brown: #37423d;
+  --onyx: #000000;
+  --dark-coffee: #1a1a1a;
+  --dusty-taupe: #ffea90;
+  --dim-grey: #999900;
+  --charcoal-brown: #333300;
   
   /* Base background and surfaces */
-  --bg: #171614;         
-  --surface: #1f1e1c;     
+  --bg: #000000;
+  --surface: #111111;
   
   /* Text colors */
-  --text: #ffffff;      
-  --muted: #b0a3a3; 
+  --text: #ffffff;
+  --muted: #ffffff;
   
   /* Accent colors */
-  --accent: #9a8873;       
-  --accent-hover: #a89881; 
-  --accent-text: #ffffff; 
+  --accent: #c9a200;
+  --accent-hover: #d8b200;
+  --accent-text: #ffffff;
   
   /* Border and divider colors */
-  --bordercolor: #3a2618; 
+  --bordercolor: #4d4300; 
 
-  --overlay: rgba(23, 22, 20, 0.7);
-  --overlay-hover: rgba(23, 22, 20, 0.9);
+  --overlay: rgba(0, 0, 0, 0.7);
+  --overlay-hover: rgba(0, 0, 0, 0.9);
 
   --radius-sm: 0rem;
   --radius-md: 1rem;

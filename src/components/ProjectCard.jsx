@@ -9,7 +9,7 @@ export default function ProjectCard({ project }) {
           <img
             src={project.thumbnail}
             alt={project.title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 pointer-events-none"
           />
         </div>
 
@@ -20,7 +20,7 @@ export default function ProjectCard({ project }) {
 
           {/* Tags */}
           <div className="flex flex-wrap gap-2">
-            {project.tags.slice(0, 3).map((tag) => (
+            {project.tags.map((tag) => (
               <span
                 key={tag}
                 className="text-xs bg-[var(--accent)] text-white px-2 py-1 rounded-md"

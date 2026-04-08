@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import projectData from "../data/projectdata.json";
 import ProjectHeader from "../components/projects/ProjectHeader";
 import ProjectInfo from "../components/projects/ProjectInfo";
@@ -28,12 +28,34 @@ export default function ProjectPage() {
         url: `/projects/${projectData.projects[nextIndex].id}` 
     };
 
+    const relatedProjects = projectData.projects
+      .filter((p) => p.id !== projectId && p.tags.some((tag) => project.tags.includes(tag)))
+      .slice(0, 6);
+
     return (
         <div>
             <ProjectHeader project={project} />
             <ProjectInfo project={project} />
             <ProjectMechanics project={project} />
             <ProjectGallery project={project} />
+
+            {relatedProjects.length > 0 && (
+              <div className="mb-8 mx-4">
+                <h2 className="text-xl font-semibold text-[var(--text)] mb-3">Gerelateerde projecten</h2>
+                <div className="flex flex-wrap gap-2">
+                  {relatedProjects.map((related) => (
+                    <Link
+                      key={related.id}
+                      to={`/?tag=${encodeURIComponent(related.tags.find((tag) => project.tags.includes(tag)))}`}
+                      className="px-3 py-1 text-sm bg-[var(--accent)] text-white rounded-md hover:opacity-95 transition-opacity"
+                    >
+                      {related.title}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
+
             <ProjectPrevNext previous={previousProject} next={nextProject} />
         </div>   
     );   
