@@ -40,11 +40,12 @@
       "tagline": "A XR experince to see what people see that are colorblind",
       "description": "This experince is made for a museum project the University of Utrecht Museum here the had multiple expeditions about what the do in the univeristy as a team of 6 we chose that we wanted to do something with color blind so people can see what other people will see when there are color blind in the world",
       "thumbnail": "https://i.postimg.cc/WzHXmfxY/Poster-Versie2.png",
-      "youtube": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      "youtube": "https://www.youtube.com/embed/3PNnsLEMaro?si=rU-dlgxC2p0pBm61",
       "screenshots": [
-        "https://picsum.photos/seed/xr1/1200/800",
-        "https://picsum.photos/seed/xr2/1200/800",
-        "https://picsum.photos/seed/xr3/1200/800"
+        "https://i.postimg.cc/nrtRnHKs/Screenshot-20260617-084126.png",
+        "https://i.postimg.cc/qB8Dj30V/Screenshot-20260617-084155.png",
+        "https://i.postimg.cc/mZQp8HRT/Screenshot-20260617-084217.png",
+        "https://i.postimg.cc/zBh2mLgk/Screenshot-20260617-084255.png"
       ],
       "tags": ["Unity", "C#", "XR", "Mixed Reality"],
       "projectRole": "XR Developer",
@@ -53,13 +54,13 @@
         {
           "subtitle": "ResetGame",
           "description": "This resets the game fully with the color filter change slow fade of the old colorfilter and resets you back to the main menu screen",
-          "image": "https://placehold.co/600x400?text=Grab",
+          "image": "https://i.postimg.cc/qB8Dj30V/Screenshot-20260617-084155.png",
           "code": "private IEnumerator Resetgame(float time)\n{\n    Texture2D activeLUT = (Texture2D)colorLookup.texture.value;\n    float startContribution = colorLookup.contribution.value;\n\n    float elapsed = 0f;\n\n    while (elapsed < time)\n    {\n        elapsed += Time.deltaTime;\n        float pct = elapsed / time;\n        \n        colorLookup.contribution.value = Mathf.Lerp(startContribution, 0f, pct);\n        colorLookup.texture.value = activeLUT;\n\n        float w = Mathf.Lerp(startContribution, 0f, pct);\n        passthroughLayer.SetColorLut(new OVRPassthroughColorLut(activeLUT, flipY: false), w);\n\n        yield return null;\n    }\n    \n    colorLookup.contribution.value = 0f;\n    passthroughLayer.SetColorLut(new OVRPassthroughColorLut(activeLUT, flipY: false), 0f);\n\n    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);\n}"
         },
         {
           "subtitle": "Smoothie Glass Shader Fill",
           "description": "This fills the glass to look like the glass is being filled before you give it to the customer",
-          "image": "https://placehold.co/600x400?text=Grab",
+          "image": "https://i.postimg.cc/nrtRnHKs/Screenshot-20260617-084126.png",
           "code": "private IEnumerator SmoothFill(float targetfill, float duration)\n{\n    float startfill = matfill;\n    float time = 0f;\n\n    while (time < duration)\n    {\n        time += Time.deltaTime;\n        matfill = Mathf.Lerp(startfill, targetfill, time / duration);\n\n        if (material != null)\n        {\n            material.SetFloat(\"_Fill\", matfill);\n        }\n        \n        yield return null;\n    }\n}"
         }
       ],
