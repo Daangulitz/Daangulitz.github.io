@@ -3,12 +3,13 @@ export const siteConfig = {
   role: "Game/XR Developer",
   tagline: "I build immersive VR/AR and Game experiences .",
   aboutImage: "https://i.postimg.cc/tR6NDFpd/IMG-2463.jpg",
-  cv: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+  cv: "nederlands-cv-portfolio.tiiny.site",
 
   socials: {
     email: "Daangulitz@icloud.com",
     github: "https://github.com/Daangulitz",
     itch: "https://daangulitz.itch.io/",
+    linkedin: "https://www.linkedin.com/in/daan-gulitz-205887428/",
   },
 
   aboutLong: `

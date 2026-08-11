@@ -68,16 +68,40 @@
       "itch": "https://daangulitz.itch.io/colormadness"
     },
     {
+      "id": "NowYouDye",
+      "title": "NowYouDye",
+      "tagline": "A multiplayer FFA Game",
+      "description": "Now You Dye is a free-for-all multiplayer brawler where you have to knock people out of the skate bowl. We made it with a team of 3 developers and 4 artists in Unreal Engine using Blueprints, and we integrated Epic Games' EOS multiplayer system.",
+      "thumbnail": "https://i.postimg.cc/brKByX7c/jxepjm.png",
+      "youtube":"https://www.youtube.com/embed/-emxp0erjbM?si=yY9zIT64NhcsOsiH",
+      "screenshots": [
+        "https://i.postimg.cc/bv9cmvKk/Screenshot-20260630-110848.png",
+        "https://i.postimg.cc/BvB9mvdc/Screenshot-20260630-111217.png",
+        "https://i.postimg.cc/L5CNXcw7/image.png",
+        "https://i.postimg.cc/0jWcQTFB/background.png"
+      ],
+      "tags": ["Unreal", "OnlineMultiplayer", "3D", "BluePrints","FreeForAll"],
+      "projectRole": "Lead Developer",
+      "timeline": "10 weeks",
+      "mechanics": [
+        {
+          "subtitle": "Lobby to Game Blueprint",
+          "description": "This handles that the game loads the correct level after the character select screen",
+          "blueprintImage": "https://i.postimg.cc/BvB9mvdc/Screenshot-20260630-111217.png",
+          "image": "https://i.postimg.cc/dtb6NcPC/Blue-Print-From-Lobby-To-Game.png"
+          
+        }
+      ],
+      "git": "https://app.diversion.dev/repo/dv.repo.629b1b36-a638-4974-bff0-c2d18827bd5a/workspace/dv.ws.fdeecd20-bc47-46a2-910f-655191fe0e23/edit",
+      "itch": "https://drathebean.itch.io/now-you-dye"
+    },
+    {
       "id": "Project-Timeline",
       "title": "Project-Timeline",
       "tagline": "A fast-paced first-person roguelike in space.",
       "description": "This is a first-person roguelike shooter developed in Unreal Engine using both Blueprints and C++. The goal of the project was to create a fast-paced, responsive shooter featuring challenging enemy AI and a wide variety of weapons. Players navigate through procedurally generated levels while fighting waves of enemies.Through this project, I learned how to design effective AI behaviors using behavior trees and blackboards, as well as how to implement a dynamic weapon and damage system. I also gained experience in creating diverse boss encounters. Overall, this project strengthened my skills in both Blueprints and C++, and deepened my understanding of level design and game balance.",
       "thumbnail": "https://i.postimg.cc/YC7hXYT6/Project-Timeline-Thumail.png",
       "youtube": "https://www.youtube.com/embed/_OoYvTk-WwY?si=GVNVWLRZz7Lk47HR",
-      "screenshots": [
-        "https://picsum.photos/seed/shooter1/1200/800",
-        "https://picsum.photos/seed/shooter2/1200/800"
-      ],
       "tags": ["Unreal", "BluePrints", "C++", "Roguelike", "FirstPerson"],
       "projectRole": "Programmer, Artist, SoundDesign",
       "timeline": "3 weeks school, to own project",
@@ -106,9 +130,9 @@
       "thumbnail": "https://i.postimg.cc/VsRX8w0x/posterfinal.png",
       "youtube": "https://www.youtube.com/embed/SCHRtTqZz6c?si=uCkVgPFJlD8sVX-j",
       "screenshots": [
-        "https://picsum.photos/seed/vrt1/1200/800",
-        "https://picsum.photos/seed/vrt2/1200/800",
-        "https://picsum.photos/seed/vrt3/1200/800"
+        "https://i.postimg.cc/dtLb4b7d/Screenshot-20260707-105246.png",
+        "https://i.postimg.cc/gknCNCwq/Screenshot-20260707-105304.png",
+        "https://i.postimg.cc/L6ncNcqt/Screenshot-20260707-105319.png"
       ],
       "tags": ["Unity", "VR", "OnlineMultiplayer", "C#"],
       "projectRole": "Developer",
@@ -137,10 +161,6 @@
       "description": "Rattle & Roll is a VR rally racing experience designed for use with a Yaw 3 motion simulator. The game features a big sandbox enviromnt with a lot of bumbs to feel the fun of the motion simulator.",
       "thumbnail": "https://i.postimg.cc/m269Gc2g/Screenshot-2026-01-28-081505.png",
       "youtube": "https://youtube.com/embed/1sLr7j3390k?si=mmE0K9P33Zycrm6F",
-      "screenshots": [
-        "https://picsum.photos/seed/arm1/1200/800",
-        "https://picsum.photos/seed/arm2/1200/800"
-      ],
       "tags": ["Unity", "Motion Simulator", "VR", "C#"],
       "projectRole": "Developer",
       "timeline": "4 weeks",
@@ -187,21 +207,42 @@
       "title": "Oasis Summit",
       "tagline": "A immersive installation project for Oasis Summit 2026 in the Netherlands", 
       "description": "Oasis Summit is an immersive installation project created for the Oasis Summit 2026 event in the Netherlands Rotterdam. We created a immersive instalation with a team of 40 people where we build the installation for the television compeny AVROTROS the installation was about the programm called 'maestro' where famous dutch people are conducting an orchestra. The installation that we made needed to let people feel like they are the conductor of the orchesta.",
-      "thumbnail": "https://i.postimg.cc/Y0VSJv6c/H0wlbg.png",
+      "thumbnail": "https://i.postimg.cc/Hk8tk6Ht/IMG-8107.jpg",
+      "youtube": "https://www.youtube.com/embed/33fCgp1yNAA?si=AQb-q36pDsPXqfgT",
       "screenshots": [
-        "https://i.postimg.cc/FRwR6fgX/vdcf3O.png",
-        "https://i.postimg.cc/wBGTttr8/Wf5Ucd.png",
-        "https://i.postimg.cc/903mp6C5/UVGKy-K.png",
-        "https://i.postimg.cc/ncJVQf3q/tz-2Bz-Bs.png",
-        "https://i.postimg.cc/Dwf2Bdkq/ODwzp-B.png",
-        "https://i.postimg.cc/kGFmyDTF/7m-ULno.png"
+        "https://youtube.com/embed/Ju1T1q8s2Wo?si=7oaXhiFfwy1c3Fuq",
+        "https://i.postimg.cc/J4nq91Fh/IMG-3058.jpg",
+        "https://i.postimg.cc/Hk8tk6Ht/IMG-8107.jpg"
+
       ],
-      "tags": ["Unity", "Immersive", "C#"],
+      "tags": ["Unity", "Immersive", "C#", "Installation"],
       "projectRole": "Developer",
-      "timeline": "2 weeks",
-      
-      "git": "https://github.com/Daangulitz/Global-game-jam-26",
-      "itch": "https://fienthedestroyer.itch.io/john-sprint"
+      "timeline": "2 weeks"
+    },
+    {
+      "id": "HoofdHarmony",
+      "title": "HoofdHarmony",
+      "tagline": "A Immersive installation project with singing heads",
+      "description": "Hoofdharmony is an immersive installation that we built for our school. It's about 3 heads that say iconic movie quotes. It works with a projector, a Raspberry Pi, a Kinect, and a set of speakers.",
+      "thumbnail": "https://i.postimg.cc/YCYnMs2j/IMG-1503.png",
+      "youtube":"https://youtube.com/embed/ch6bHrSOaKs",
+      "screenshots": [
+        "https://i.postimg.cc/JzZ6M27H/IMG-1461.png",
+        "https://i.postimg.cc/x1Mxn4jb/IMG-1462.png",
+        "https://i.postimg.cc/YCYnMs2j/IMG-1503.png"
+      ],
+      "tags": ["Unity", "Immersive", "C#","Installation"],
+      "projectRole": "Developer + Desinger",
+      "timeline": "8 weeks",
+      "mechanics": [
+        {
+          "subtitle": "Tripwire system",
+          "description": "Virtual tripwire to play audio",
+          "code": "private void CheckKinectBeam()\n{\n    if (kinect == null || !kinect.IsInitialized()) return;\n\n    ushort[] depthMap = kinect.GetRawDepthMap();\n    if (depthMap == null) return;\n\n    int index = (depthY * 512) + depthX;\n    if (index >= 0 && index < depthMap.Length)\n    {\n        int currentDepth = depthMap[index];\n\n        if (currentDepth > 500 && currentDepth < triggerDistance)\n        {\n            if (!isBeamBlocked)\n            {\n                isBeamBlocked = true;\n                               PlayRandomQuote();\n            }\n        }\n        else\n        {\n            isBeamBlocked = false;\n        }\n    }\n}"
+        }
+      ],
+      "git": "https://github.com/Daangulitz/HoofdHarmony/tree/main"
     }
+    
   ]
 }

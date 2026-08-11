@@ -7,19 +7,24 @@ import projectData from "../data/projectdata.json";
 export default function Home() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [activeProjectTab, setActiveProjectTab] = useState("projects");
   const tagParam = searchParams.get("tag");
   const tagsParam = searchParams.get("tags");
   const selectedTagsFromParam = tagsParam ? tagsParam.split(",").filter(Boolean) : [];
   const selectedTags = selectedTagsFromParam.length > 0 ? selectedTagsFromParam : tagParam ? [tagParam] : [];
   const projects = projectData.projects;
 
+  const visibleProjects = activeProjectTab === "gamejam"
+    ? projects.filter((project) => project.tags.includes("GameJam"))
+    : projects.filter((project) => !project.tags.includes("GameJam"));
+
   const allTags = Array.from(
-    new Set(projects.flatMap((project) => project.tags))
+    new Set(visibleProjects.flatMap((project) => project.tags))
   ).sort();
 
   const filteredProjects = selectedTags.length > 0
-    ? projects.filter((project) => project.tags.some((tag) => selectedTags.includes(tag)))
-    : projects;
+    ? visibleProjects.filter((project) => project.tags.some((tag) => selectedTags.includes(tag)))
+    : visibleProjects;
 
   const toggleTag = (tag) => {
     const nextTags = selectedTags.includes(tag)
@@ -60,8 +65,30 @@ export default function Home() {
 
         {/* Projects Section */}
         <div className="container mx-auto mt-12">
-          <div className="mb-4 flex items-center justify-between">
-            <h2 className="text-3xl font-bold text-[var(--text)]">My projects</h2>
+          <div className="mb-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <h2 className="text-3xl font-bold text-[var(--text)]">My projects</h2>
+              <div className="mt-3 flex flex-wrap gap-2">
+                <button
+                  onClick={() => setActiveProjectTab("projects")}
+                  className={`px-4 py-2 rounded-lg border transition ${activeProjectTab === "projects"
+                    ? "bg-[var(--accent)] text-white border-[var(--accent)]"
+                    : "bg-[var(--surface)] text-[var(--text)] border-[var(--bordercolor)] hover:bg-[var(--accent)] hover:text-white"
+                  }`}
+                >
+                  Projects
+                </button>
+                <button
+                  onClick={() => setActiveProjectTab("gamejam")}
+                  className={`px-4 py-2 rounded-lg border transition ${activeProjectTab === "gamejam"
+                    ? "bg-[var(--accent)] text-white border-[var(--accent)]"
+                    : "bg-[var(--surface)] text-[var(--text)] border-[var(--bordercolor)] hover:bg-[var(--accent)] hover:text-white"
+                  }`}
+                >
+                  Game Jam
+                </button>
+              </div>
+            </div>
             <button
               onClick={() => setIsFilterOpen((prev) => !prev)}
               className="px-4 py-2 rounded-lg border border-[var(--bordercolor)] bg-[var(--surface)] hover:bg-[var(--accent)] hover:text-white transition-colors"
