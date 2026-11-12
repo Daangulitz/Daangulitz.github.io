@@ -159,17 +159,21 @@
       "title": "Race & Rally",
       "tagline": "A VR rally racing game for the Meta Quest 3,and a Yaw 3 motion simulator tilts and turns with the car.",
       "description": "Race-N-Rally is a standalone VR rally game for the Meta Quest 3. The player sits in a Yaw 3 motion simulator and drives with a Honeycomb Alpha flight yoke. Turning the yoke steers the car, and pushing or pulling it gives gas and brake. The car’s movements are sent to the simulator, so you feel the corners and bumps on your whole body.A race starts when you hold the gas for two seconds. You then drive three laps against the clock, and your best time is saved to a database for the active player. A second camera lets bystanders follow the race on a screen.",
-      "thumbnail": "https://i.postimg.cc/m269Gc2g/Screenshot-2026-01-28-081505.png",
+      "thumbnail": "https://i.postimg.cc/wBXDjzd0/Screenshot-20261112-143129.png",
+      "screenshots": [
+        "https://i.postimg.cc/wBXDjzd0/Screenshot-20261112-143129.png",
+        "https://i.postimg.cc/XJndZPVK/Screenshot-20261112-143146.png"
+      ],
       "youtube": "https://youtube.com/embed/1sLr7j3390k?si=mmE0K9P33Zycrm6F",
       "tags": ["Unity", "Motion Simulator", "VR", "C#", "Raspberry Pi", "Python"],
       "projectRole": "Developer",
       "timeline": "8 weeks",
       "mechanics": [
         {
-          "subtitle": "Gear up system",
-          "description": "This system handles the gear up input from the player and changes the gear accordingly the gear down works almost the same but the other way around.",
-          "image": "https://i.postimg.cc/7h3KW3yZ/Gear-up-Rattle-and-roll.gif",
-          "code": "private void HandleGearUp(InputAction.CallbackContext ctx)\n{\n    int next = currentGearIndex;\n    if (currentGearIndex == 1) next = 0; // R -> N\n    else if (currentGearIndex == 0) next = 2; // N -> 1st\n    else if (currentGearIndex < gearRatios.Length - 1) next++;\n\n    TrySetGear(next);\n}"
+          "subtitle": "Finish Line and Lap Counter",
+          "description": "This system handles the finish line and lap counting for the race. It tracks the player's time and updates the best time in the database if applicable.",
+          "image": "https://i.postimg.cc/XJndZPVK/Screenshot-20261112-143146.png",
+          "code": "using UnityEngine;\n\npublic class Finish : MonoBehaviour\n{\n    private static Finish instance;\n    private float finishTime;\n    private bool resultSent;\n    private DatabaseManager databaseManager;\n\n    [SerializeField] private int TotalLapCount = 3;\n\n    public int CurrentLapCount { get; private set; } = 0;\n\n    private void Awake()\n    {\n        if (instance != null) Destroy(gameObject); // duplicate -> gone\n        else\n        {\n            instance = this; // first one stays\n            DontDestroyOnLoad(gameObject);\n        }\n    }\n\n    private void OnTriggerEnter(Collider other)\n    {\n        if (!other.CompareTag(\"Player\")) return; // only the player\n        if (resultSent) return; // race over, result already sent\n\n        finishTime = Timer.currentTime;\n        if (finishTime < GameManager.BestTime || GameManager.BestTime == 0f) GameManager.instance.UpdateBestTime(finishTime); // best first, so the last lap counts\n\n        UpdateLapCount(); // every lap counts, not only new bests\n        Timer.ResetTimer();\n    }\n\n    private void UpdateLapCount()\n    {\n        CurrentLapCount++;\n        if (CurrentLapCount < TotalLapCount) return; // still racing\n\n        Debug.Log(\"Race Finished!\");\n        SendFinalResult();\n    }\n\n    private void SendFinalResult()\n    {\n        if (databaseManager == null) databaseManager = FindFirstObjectByType<DatabaseManager>(); // find once, reuse\n        if (databaseManager == null) Debug.LogWarning(\"[Finish] No DatabaseManager in the scene, the final time was not sent.\");\n        else resultSent = databaseManager.SendGameResult(GameManager.BestTime); // true only if the request started\n    }\n\n    public void ResetRace() // new race -> laps and result reset\n    {\n        CurrentLapCount = 0;\n        resultSent = false;\n    }\n}"
         }
       ],
       "git": "https://github.com/jensmonne/Race-N-Rally"
