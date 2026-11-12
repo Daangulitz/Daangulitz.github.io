@@ -155,15 +155,15 @@
       "itch": "https://jensmonne.itch.io/cryosite-dev-build"
     },
     {
-      "id": "Rattle & Roll",
-      "title": "Rattle & Roll",
-      "tagline": "A Rally racing game with motion simulator support",
-      "description": "Rattle & Roll is a VR rally racing experience designed for use with a Yaw 3 motion simulator. The game features a big sandbox enviromnt with a lot of bumbs to feel the fun of the motion simulator.",
+      "id": "Race & Rally",
+      "title": "Race & Rally",
+      "tagline": "A VR rally racing game for the Meta Quest 3,and a Yaw 3 motion simulator tilts and turns with the car.",
+      "description": "Race-N-Rally is a standalone VR rally game for the Meta Quest 3. The player sits in a Yaw 3 motion simulator and drives with a Honeycomb Alpha flight yoke. Turning the yoke steers the car, and pushing or pulling it gives gas and brake. The car’s movements are sent to the simulator, so you feel the corners and bumps on your whole body.A race starts when you hold the gas for two seconds. You then drive three laps against the clock, and your best time is saved to a database for the active player. A second camera lets bystanders follow the race on a screen.",
       "thumbnail": "https://i.postimg.cc/m269Gc2g/Screenshot-2026-01-28-081505.png",
       "youtube": "https://youtube.com/embed/1sLr7j3390k?si=mmE0K9P33Zycrm6F",
-      "tags": ["Unity", "Motion Simulator", "VR", "C#"],
+      "tags": ["Unity", "Motion Simulator", "VR", "C#", "Raspberry Pi", "Python"],
       "projectRole": "Developer",
-      "timeline": "4 weeks",
+      "timeline": "8 weeks",
       "mechanics": [
         {
           "subtitle": "Gear up system",
@@ -172,7 +172,7 @@
           "code": "private void HandleGearUp(InputAction.CallbackContext ctx)\n{\n    int next = currentGearIndex;\n    if (currentGearIndex == 1) next = 0; // R -> N\n    else if (currentGearIndex == 0) next = 2; // N -> 1st\n    else if (currentGearIndex < gearRatios.Length - 1) next++;\n\n    TrySetGear(next);\n}"
         }
       ],
-      "git": "https://github.com/jensmonne/Rattle-N-Roll"
+      "git": "https://github.com/jensmonne/Race-N-Rally"
     },
     {
       "id": "JohnSprint",
